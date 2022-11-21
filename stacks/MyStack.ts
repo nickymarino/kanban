@@ -2,11 +2,11 @@ import { NextjsSite, StackContext, Table } from "@serverless-stack/resources";
 
 export function MyStack({ stack, app }: StackContext) {
   // Create the table
-  const table = new Table(stack, "Counter", {
+  const table = new Table(stack, "Kanban", {
     fields: {
-      counter: "string",
+      pk: "string",
     },
-    primaryIndex: { partitionKey: "counter" },
+    primaryIndex: { partitionKey: "pk" },
   });
 
   // Create a Next.js site

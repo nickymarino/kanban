@@ -1,11 +1,17 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
-interface CardProps {
-    title: string;
+interface ColumnProps {
+  title: string;
 }
 
-export const Card: React.FC<CardProps> = ({
-    title,
+export const Column: React.FC<PropsWithChildren<ColumnProps>> = ({
+  children,
+  title,
 }) => {
-    return <p>Card! With title: {title}</p>
+  return (
+    <div className="column">
+      <h1>{title}</h1>
+      {children}
+    </div>
+  );
 };
