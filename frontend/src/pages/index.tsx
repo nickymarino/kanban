@@ -1,15 +1,12 @@
 import React from "react";
 import useSWR from "swr";
-import { Column } from "../components/Card";
-import { Card } from "../components/Column";
+import { Column } from "../components/Column";
+import { Card } from "../components/Card";
 import { Board } from "./api/board";
+import StyledEmotionButton from "../components/StyledEmotionButton";
 
 export default function App() {
-  return (
-    <div>
-      <Content />
-    </div>
-  );
+  return <Content />;
 }
 
 function Content() {
@@ -27,6 +24,7 @@ function Content() {
     <div className="content">
       {data.columns.map((column) => (
         <Column key={column.uid} title={column.title}>
+          <StyledEmotionButton />
           <ul>
             {column.cards.map((card) => (
               <Card key={card.uid} title={card.title} />
