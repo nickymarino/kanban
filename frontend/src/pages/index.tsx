@@ -1,15 +1,11 @@
-import React from "react";
+import { Box, Stack } from "@mui/material";
+import { Container } from "@mui/system";
 import useSWR from "swr";
-import { Column } from "../components/Column";
-import { Card } from "../components/Card";
+import { KanbanCard } from "../components/KanbanCard";
+import { KanbanColumn } from "../components/KanbanColumn";
 import { Board } from "./api/board";
-import StyledEmotionButton from "../components/StyledEmotionButton";
 
 export default function App() {
-  return <Content />;
-}
-
-function Content() {
   const fetcher = async (slug: string): Promise<Board> =>
     await fetch(slug).then((res) => res.json());
 
@@ -21,17 +17,30 @@ function Content() {
   console.log({ data, error });
 
   return (
-    <div className="content">
-      {data.columns.map((column) => (
-        <Column key={column.uid} title={column.title}>
-          <StyledEmotionButton />
-          <ul>
-            {column.cards.map((card) => (
-              <Card key={card.uid} title={card.title} />
-            ))}
-          </ul>
-        </Column>
-      ))}
-    </div>
+    <Container maxWidth="lg">
+      <Box
+        sx={{
+          my: 4,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "flex-start",
+        }}
+      >
+        <Stack direction="row" spacing={2}>
+          {data.columns.map((column) => (
+            <Stack direction="column" spacing={2}>
+              <KanbanColumn key={column.uid} title={column.title}>
+                <Stack direction="column" spacing={1}>
+                  {column.cards.map((card) => (
+                    <KanbanCard key={card.uid} title={card.title} />
+                  ))}
+                </Stack>
+              </KanbanColumn>
+            </Stack>
+          ))}
+        </Stack>
+      </Box>
+    </Container>
   );
 }
