@@ -13,7 +13,8 @@
     "aws-sdk": "^2.991.0",
     "next": "^13.0.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "swr": "^1.1.2"
   },
   "devDependencies": {
     "@serverless-stack/static-site-env": "^0.43.2",

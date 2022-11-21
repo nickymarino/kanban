@@ -1,18 +1,33 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useSWR, { SWRResponse, Fetcher } from "swr";
+import { Document } from "./api/scratch";
 
 export default function App() {
-  const [count, setCount] = useState(null);
+  return <Content />;
+}
 
-  function onClick() {
-    fetch("/api/count", { method: "POST" })
-      .then((response) => response.text())
-      .then(setCount);
-  }
+function Content() {
+  const fetcher = async (slug: string): Promise<Document> =>
+    await fetch(slug).then((res) => res.json());
+
+  const { data, error } = useSWR("/api/scratch", fetcher);
+
+  if (error) return <p>Loading failed...</p>;
+  if (!data) return <h1>Loading...</h1>;
 
   return (
-    <div className="App">
-      {count && <p>You clicked me {count} times.</p>}
-      <button onClick={onClick}>Click Me!</button>
-    </div>
+    <ul>
+      {data.cards.map((card) => (
+        <Card key={card.id} title={card.title} />
+      ))}
+    </ul>
   );
 }
+
+interface CardProps {
+  title: string;
+}
+
+export const Card: React.FC<CardProps> = ({ title }) => {
+  return <li>{title}</li>;
+};
