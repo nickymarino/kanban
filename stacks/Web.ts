@@ -1,17 +1,12 @@
-import { NextjsSite, StackContext, Table } from "@serverless-stack/resources";
+import { NextjsSite, StackContext, use } from "@serverless-stack/resources";
+import { Database } from "./Database";
 
-export function MyStack({ stack, app }: StackContext) {
-  // Create the table
-  const table = new Table(stack, "Kanban", {
-    fields: {
-      pk: "string",
-    },
-    primaryIndex: { partitionKey: "pk" },
-  });
+export function Web({ stack, app }: StackContext) {
+  const table = use(Database);
 
   // Create a Next.js site
   const site = new NextjsSite(stack, "Site", {
-    path: "frontend",
+    path: "web",
     environment: {
       // Pass the table details to our app
       REGION: app.region,
