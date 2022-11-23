@@ -18,6 +18,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient({
 });
 
 export default async function handler(req, res) {
+  console.log("tablename: ", process.env.TABLE_NAME);
   const getParams = {
     // Get the table name from the environment variable
     TableName: process.env.TABLE_NAME,
