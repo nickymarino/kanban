@@ -32,6 +32,7 @@ export interface Query {
     article: Article
     articles: Article[]
     card: Card
+    cards: Card[]
     __typename: 'Query'
 }
 
@@ -64,6 +65,7 @@ export interface QueryRequest{
     article?: [{articleID: Scalars['String']},ArticleRequest]
     articles?: ArticleRequest
     card?: [{cardID: Scalars['String']},CardRequest]
+    cards?: CardRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -141,11 +143,13 @@ export interface MutationObservableChain{
 export interface QueryPromiseChain{
     article: ((args: {articleID: Scalars['String']}) => ArticlePromiseChain & {get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>) => Promise<FieldsSelection<Article, R>>}),
     articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Promise<FieldsSelection<Article, R>[]>}),
-    card: ((args: {cardID: Scalars['String']}) => CardPromiseChain & {get: <R extends CardRequest>(request: R, defaultValue?: FieldsSelection<Card, R>) => Promise<FieldsSelection<Card, R>>})
+    card: ((args: {cardID: Scalars['String']}) => CardPromiseChain & {get: <R extends CardRequest>(request: R, defaultValue?: FieldsSelection<Card, R>) => Promise<FieldsSelection<Card, R>>}),
+    cards: ({get: <R extends CardRequest>(request: R, defaultValue?: FieldsSelection<Card, R>[]) => Promise<FieldsSelection<Card, R>[]>})
 }
 
 export interface QueryObservableChain{
     article: ((args: {articleID: Scalars['String']}) => ArticleObservableChain & {get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>) => Observable<FieldsSelection<Article, R>>}),
     articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Observable<FieldsSelection<Article, R>[]>}),
-    card: ((args: {cardID: Scalars['String']}) => CardObservableChain & {get: <R extends CardRequest>(request: R, defaultValue?: FieldsSelection<Card, R>) => Observable<FieldsSelection<Card, R>>})
+    card: ((args: {cardID: Scalars['String']}) => CardObservableChain & {get: <R extends CardRequest>(request: R, defaultValue?: FieldsSelection<Card, R>) => Observable<FieldsSelection<Card, R>>}),
+    cards: ({get: <R extends CardRequest>(request: R, defaultValue?: FieldsSelection<Card, R>[]) => Observable<FieldsSelection<Card, R>[]>})
 }

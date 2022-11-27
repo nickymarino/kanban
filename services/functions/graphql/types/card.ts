@@ -29,6 +29,12 @@ builder.queryFields((t) => ({
       return result;
     },
   }),
+  cards: t.field({
+    type: [CardType],
+    resolve: async () => {
+      return await Card.list(MOCK_USER_ID);
+    },
+  }),
 }));
 
 builder.mutationFields((t) => ({

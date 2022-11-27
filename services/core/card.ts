@@ -102,3 +102,8 @@ export async function fromID(
   }
   return result.data[0];
 }
+
+export async function list(userID: string): Promise<Info[]> {
+  const result = await cards.query.user({userID}).go();
+  return result.data;
+}

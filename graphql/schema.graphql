@@ -21,4 +21,5 @@ type Query {
   article(articleID: String!): Article!
   articles: [Article!]!
   card(cardID: String!): Card!
+  cards: [Card!]!
 }

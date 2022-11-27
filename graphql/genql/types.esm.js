@@ -90,6 +90,9 @@ export default {
                     ]
                 }
             ],
+            "cards": [
+                3
+            ],
             "__typename": [
                 2
             ]
