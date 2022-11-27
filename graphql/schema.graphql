@@ -1,24 +1,13 @@
-type Article {
-  id: ID!
-  title: String!
-  url: String!
-}
-
 type Card {
-  boardID: String!
-  columnID: String!
   id: ID!
   title: String!
-  userID: String!
 }
 
 type Mutation {
-  createArticle(title: String!, url: String!): Article!
   createCard(title: String!): Card!
 }
 
 type Query {
-  article(articleID: String!): Article!
-  articles: [Article!]!
   card(cardID: String!): Card!
+  cards: [Card!]!
 }

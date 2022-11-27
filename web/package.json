@@ -15,11 +15,13 @@
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.14",
+    "@urql/devtools": "^2.0.3",
     "aws-sdk": "^2.991.0",
     "next": "^13.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "swr": "^1.1.2"
+    "swr": "^1.1.2",
+    "urql": "^3.0.3"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.10.5",
