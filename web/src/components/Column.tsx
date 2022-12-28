@@ -1,6 +1,8 @@
 import { useTypedQuery } from "@kanban/graphql/urql";
-import { Card, CardContent, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import React, { PropsWithChildren } from "react";
+import { Card } from "./Card";
+import { CreateCard } from "./CreateCard";
 
 interface ColumnProps {
   title: string;
@@ -10,7 +12,7 @@ export const Column: React.FC<PropsWithChildren<ColumnProps>> = ({
   title,
   children,
 }) => {
-  const [cards] = useTypedQuery({
+  const [result] = useTypedQuery({
     query: {
       cards: {
         id: true,
@@ -18,24 +20,22 @@ export const Column: React.FC<PropsWithChildren<ColumnProps>> = ({
       },
     },
   });
+  const { data, fetching, error } = result;
+
+  if (fetching) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  if (!data) return <p>Not found</p>;
+
+  const cardsToRender = data.cards;
 
   return (
     <React.Fragment>
       <Typography variant="h5">{title}</Typography>
       <Stack direction="column" spacing={2}>
-        {cards.fetching ? (
-          <p>Loading...</p>
-        ) : cards.data?.cards ? (
-          cards.data?.cards.map(card => (
-            <Card key={card.id} sx={{ minWidth: 275 }} variant="outlined">
-              <CardContent>
-                <Typography variant="body1">{card.title}</Typography>
-              </CardContent>
-            </Card>
-          ))
-        ) : (
-          <p>{cards.error.toString()}</p>
-        )}
+        {cardsToRender.map(card => (
+          <Card key={card.id} card={card} />
+        ))}
+        <CreateCard />
       </Stack>
       {children}
     </React.Fragment>
